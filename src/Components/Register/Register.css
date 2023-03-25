@@ -1,0 +1,39 @@
+.reg_holder{
+    min-height: 700px;
+    width: 100%;
+}
+
+.reg_cover_img{
+    background-image: url("https://i.ibb.co/pRp3Jt9/FB-IMG-1649147553029.jpg");
+    /* background-image: url("https://i.ibb.co/tbmH6zJ/New-Project-2.jpg"); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    height: 200px;
+    width: 100%;
+}
+
+.reg_left{
+    padding: 20px;
+}
+
+.reg_right{
+    min-height: 550px;
+    padding: 20px;
+}
+
+.reg_vector_img{
+    height: 200px;
+}
+
+.reg_form{
+    text-align: left;
+    width: 70%;
+    margin-left: 2px solid black;
+}
+
+.reg_text{
+    font-family: 'Roboto', sans-serif;
+    color: crimson;
+}

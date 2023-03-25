@@ -1,0 +1,94 @@
+.home_main{
+    background-color: #ededed;
+    min-height: 500px;
+}
+
+.banner{
+    height: 200px;
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(0, 0, 0, 0.589)), url('https://i.ibb.co/41h9x9y/DIU-Dhaka-International-University-OUT-banner.jpg');
+    /* background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(0, 0, 0, 0.589)), url('https://i.ibb.co/YT5C9PK/New-Project-3.jpg'); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.profile_left{
+    min-height: 200px;
+    padding: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: white;
+}
+
+.profile_right{
+    min-height: 200px;
+    background-color: white;
+}
+
+.info_holder{
+    text-align: left;
+    padding: 10px;
+}
+
+.account_details_heading{
+    color: crimson;
+    border-bottom: 1px solid rgb(153, 153, 153);
+}
+
+td{
+    min-width: 100px;
+    border: 1px solid black;
+}
+
+.home_gallery{
+    background-color: white;
+    min-height: 300px;
+}
+
+.custom_nav{
+    min-height: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.for_shadow {
+    margin: 5px;
+}
+
+.for_shadow:hover{
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    /* box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.nav_style{
+    text-decoration: none;
+    color: black;
+}
+
+.nav_style:hover{
+    text-decoration: none;
+    color: black;
+}
+
+
+.gallery_holder{
+
+}
+
+.climber_style{
+    width: 200px;
+}
+
+.footer_img{
+    width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+    .banner{
+        background-image: url("https://i.ibb.co/g7CDgzk/FB-IMG-1592065047469.jpg");
+    }
+}
