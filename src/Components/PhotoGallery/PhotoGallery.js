@@ -39,6 +39,18 @@ const PhotoGallery = () => {
   let timer = 0;
   const { api, setApi, apiManager, apierror, msgBoxHeight, errorMsgHandler } = useApiManager();
 
+  const decode = (secret, ciphertext) => {
+    const dec = [];
+    const enc = atob(ciphertext); // Use atob() to decode base64
+    for (let i = 0; i < enc.length; i += 1) {
+      const keyC = secret[i % secret.length];
+      const decC = `${String.fromCharCode((256 + enc.charCodeAt(i) - keyC.charCodeAt(0)) % 256)}`;
+      dec.push(decC);
+    }
+    return dec.join('');
+  };
+  
+
   const onSwitchAction = () => {
     setIsSwitchOn(!isSwitchOn);
   };
@@ -107,12 +119,11 @@ const PhotoGallery = () => {
     setHeart(false);
     setProgressdata(0);
     setUpbtn(true);
-    //setErrormsg([]);
     setSuccess('');
     timer = 0;
     startTime();
 
-    const secret = { secret : codeone, gallery : params?.galleryId, start: picture?.length, limit: limit};
+    const secret = { gallery : params?.galleryId, start: picture?.length, limit: limit};
     // fetch('http://localhost:5000/dlen',{
     fetch(`${api}/dlen`,{
       method:'POST',
@@ -135,7 +146,18 @@ const PhotoGallery = () => {
       })
       .then(res => res.json())
       .then(data => {
-        setPicture(data);
+            let i = 0;
+            if(data?.length){
+                for(i; i < data?.length; i++){
+                  const decoded = decode(codeone, data[i].b64);
+                  data[i].b64 = decoded;
+                }
+                if(i === data?.length){
+                  setPicture(data);
+                } else {
+                    console.log("No Picture Found");
+                }
+            }
         notbreaker = false;
         setImageloading(false);
         stopTimer(progressdata);
@@ -153,7 +175,7 @@ const PhotoGallery = () => {
         stopTimer(progressdata);
         setLimit(3);
         setLoadMoreDetection(loadMoreDetection + 1);
-        setCurrentstate('Retrying, Please Wait!');
+        setCurrentstate('Failed To Fetch, Try Again!');
         errorMsgHandler();
         setApi(apiManager(api));
       });
@@ -167,18 +189,17 @@ const PhotoGallery = () => {
       stopTimer(progressdata);
       setLimit(3);
       setLoadMoreDetection(loadMoreDetection + 1);
-      setCurrentstate('Retrying, Please Wait!');
+      setCurrentstate('Failed To Fetch, Try Again!');
       errorMsgHandler();
       setApi(apiManager(api));
     });
   }
 
   const handleLoadMore = () => {
-    //setErrormsg([]);
     setSuccess('');
     if(picture?.length < datalength){
       setLoadingmore(true);
-      const secret = { secret : codeone, gallery : params?.galleryId, start: picture?.length, limit: limit};
+      const secret = { gallery : params?.galleryId, start: picture?.length, limit: limit};
       fetch(`${api}/picture`,{
       // fetch('https://odd-teal-haddock-wig.cyclic.app/picture',{
       // fetch('http://localhost:5000/picture',{
@@ -192,8 +213,19 @@ const PhotoGallery = () => {
       .then(res => res.json())
       .then(data => {
         let arr = picture;
-        Array.prototype.push.apply(arr,data);
-        setPicture(arr);
+        let i = 0;
+        if(data?.length){
+            for(i; i < data?.length; i++){
+              const decoded = decode(codeone, data[i].b64);
+              data[i].b64 = decoded;
+            }
+            if(i === data?.length){
+              Array.prototype.push.apply(arr,data);
+              setPicture(arr);
+            } else {
+                console.log("No Picture Found");
+            }
+        }
         setUpbtn(false);
         setLoadingmore(false);
         setLoadMoreDetection(loadMoreDetection + 1);
