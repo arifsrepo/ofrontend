@@ -8,7 +8,7 @@
 }
 
 .verifie_img{
-    height: 250px;
+    max-height: 200px;
 }
 
 .verifie_heading{
@@ -17,4 +17,33 @@
 
 .verife_msg_div{
     padding: 30px;
+}
+
+.welcome_msg{
+    background-color: #a9a9a942;
+    width: 80%;
+    margin-left: 10%;
+    word-wrap:break-word;
+    min-height: 100px;
+    padding: 20px;
+}
+
+.resend_btn_holder{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 200px;
+}
+
+.btn_holder_flexer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 440px) {
+    .welcome_msg{
+        width: 95%;
+        margin-left: 2.5%;
+    }   
 }

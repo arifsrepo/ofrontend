@@ -16,7 +16,7 @@ const useFirebase = () => {
     const [userdata, setUserdata] = useState({});
     const auth = getAuth();
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         setLoading(true);
         setError('');
@@ -26,7 +26,6 @@ const useFirebase = () => {
               // https://firebase.google.com/docs/reference/js/firebase.User
               const uid = user.uid;
               setUser(user);
-              console.log("user find : ",user);
               setLoading(false);
               // ...
             } else {
@@ -42,9 +41,9 @@ const useFirebase = () => {
       setLoading(true);
       setError('');
       setLogspiner(true);
-      createUserWithEmailAndPassword(auth, userdata.email, userdata.pass1)
-        .then((userCredential) => {
-            fetch('http://localhost:5000/user', {
+      createUserWithEmailAndPassword(auth, userdata.email, userdata.pass1).then((userCredential) => {
+            fetch('https://odd-teal-haddock-wig.cyclic.app/user', {
+            // fetch('https://ourbackend-zauf.onrender.com/user', {
               method:'POST',
               headers: {
                 'content-type':'application/json'
@@ -64,13 +63,8 @@ const useFirebase = () => {
     const emailVerification = () => {
       sendEmailVerification(auth.currentUser)
         .then(() => {
-          console.log("set loading false");
           setLoading(false);
-          if(user.email){
-            navigate("/verifie");
-          } else {
-            navigate("/login");
-          }
+          navigate("/verifie");
         });
       }
 
@@ -102,19 +96,15 @@ const useFirebase = () => {
     }
 
     const logut = () => {
-      console.log("called");
       signOut(auth).then(() => {
           // Sign-out successful.
           setUser(null);
           navigate("/login");
-          console.log("User Singed Out");
         }).catch((error) => {
           // An error happened.
           setError(error.message);
         });
     }
-
-    console.log("userdata in useFirebase : ", userdata);
 
     return {
         user,

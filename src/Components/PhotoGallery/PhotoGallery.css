@@ -1,14 +1,97 @@
-.img_holder{
-    min-height: 250px;
-    border: 1px solid black;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+.progress-bar[aria-valuenow="0"] {
+    transition: none;
 }
+
 
 .uploader_btn{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+.pic_loading_spiner{
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.code_holder{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.code_holder_input{
+    width: 30%;
+}
+
+.heart_loading_img_holder{
+    padding: 50px;
+}
+
+.load_more_div{
+    width: 100%;
+    font-size: 35px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: cornflowerblue;
+}
+
+.spiner_style{
+    font-size: 18px;
+}
+
+.msg_div{
+    padding: 10px;
+    font-family: Arial;
+    animation: fadeIn 5s;
+}
+
+.main_form_control{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.form_control{
+    width: 800px;
+}
+
+.img_col{
+    width: 100%;
+}
+
+.check_button_holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/******************************************/
+
+
+.masonry-collage-container {
+    width: 100%;
+  }
+  
+  .masonry-grid {
+    display: flex;
+    margin-left: -10px; /* Remove left margin to align with container edge */
+    width: auto;
+  }
+  
+  .masonry-grid-column {
+    padding-left: 10px; /* Add left padding to create the gap between columns */
+  }
+  
+  .masonry-item img {
+    width: 100%;
+    display: block;
+    margin-bottom: 0; /* Remove image spacing */
+  }

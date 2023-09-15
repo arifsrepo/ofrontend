@@ -1,4 +1,11 @@
 .single_photo{
-    max-width: 150px;
-    margin: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+@media screen and (max-width: 440px) {
+    .single_photo{
+        width: 95%;
+    }
 }

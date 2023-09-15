@@ -2,10 +2,12 @@ import React from 'react';
 import './Photo.css';
 
 const Photo = (props) => {
-    const { myFile } = props.data;
+    let str = props?.data?.b64;
     return (
-        <div className="single_photo">
-            <img className=" img-fluid" src={`${myFile}`} />
+        // <div className="embed">
+        <div> 
+            <img className="img-fluid single_photo" src={`data:image/png;base64,${str}`}/>
+            <br />
         </div>
     );
 };

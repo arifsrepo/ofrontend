@@ -50,7 +50,7 @@ td{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .for_shadow {
@@ -87,8 +87,110 @@ td{
     width: 100%;
 }
 
+.icon_class{
+    margin: 0;
+    padding: 0;
+}
+
+.icon_holder{
+    /* color: cornflowerblue;
+    font-size: 40px;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    border-radius: 30px; */
+
+
+    
+  height: 40px;
+  width: 40px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 38px;
+
+
+    position: fixed;
+    z-index: 5;
+    bottom: 140px;
+    right: 30px;
+}
+
+.icon_style {
+    color: cornflowerblue;
+    font-size: 40px;
+    position: fixed;
+    z-index: 5;
+    bottom: 140px;
+    right: 20px;
+    background-color: white;
+    border-radius: 50%;
+  }
+
+.api_change_icon_holder{
+    color: white;
+    font-size: 30px;
+    position: fixed;
+    z-index: 5;
+    bottom: 70px;
+    right: 20px;
+    margin: 0;
+    background-color: rgb(59, 156, 96);
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.form_fotter{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form_button_holder{
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+
+
+.heart_loading_img_holder{
+    padding: 20px;
+}
+
+
+.masonry-collage-container2 {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+  }
+
+.show_error_section{
+    width: 100%;
+    position: fixed;
+    z-index: 5;
+    bottom: 0;
+    color: #D8000C;
+    border: 1px solid;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-color:  #FFBABA;
+    display: none;
+}
+
 @media screen and (max-width: 900px) {
     .banner{
         background-image: url("https://i.ibb.co/g7CDgzk/FB-IMG-1592065047469.jpg");
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .form_button_holder{
+        flex-wrap: wrap;
+        align-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 80px;
     }
 }

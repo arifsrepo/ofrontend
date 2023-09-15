@@ -4,10 +4,10 @@ import useFirebase from '../../hooks/useFirebase';
 
 const ProtectedRoute = ({children}) => {
     const { user, loading } = useFirebase();
-    console.log("User inside Privater Route : ", user);
-    const emailstate = user.emailVerified;
+    
+    const emailstate = user?.emailVerified;
     if(loading){
-        return<div>loading...</div>
+        return<div><br /><br /><img className="img-fluid" src="https://i.ibb.co/7k2x4s7/1-Gvgic29bgoi-GVLm-I6-AVb-Ug.gif" alt="" /></div>
     } else {
         if(user.email && emailstate){
             return children;

@@ -16,9 +16,6 @@ const Login = () => {
 
     const { user, loading, userdata, error, logspiner, setError, setUserdata, emailLogin, ressetPassword, setResetpass, handleEmailPassSignIn } = contextData;
 
-
-    console.log("Context data : ", contextData.emailLogin);
-
     const [toggler, setToggler] = useState(false);
     const [show, setShow] = useState(false);
     const [reseterror, setReseterror] = useState('');
@@ -92,7 +89,7 @@ const Login = () => {
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Control required onBlur={handlePassChangeEmail} type="email" placeholder="Your Email Address" autoFocus />
+                        <Form.Control required onBlur={handlePassChangeEmail} autoComplete="off" type="email" placeholder="Your Email Address" autoFocus />
                         </Form.Group>
                         <div className="reset_msg">
                             <p>{reseterror}</p>
@@ -118,7 +115,7 @@ const Login = () => {
                         <Col className="col1" sm md lg={6} xs={12}>
                             <h1 className="headder_text"><b>WELCOME</b></h1>
                             <div>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur, tempora ratione. Nihil, esse praesentium. Officiis fuga at deleniti non expedita tempora beatae, cumque ipsa, ipsam cum ea maiores eaque esse?</p>
+                                <p className="welcome_quote">Love is when he gives you a piece of your soul, that you never knew was missing.</p>
                             </div>
                         </Col>
                         <Col className="col2" sm md lg={6} xs={12}>
@@ -134,7 +131,7 @@ const Login = () => {
 
                                     <Form.Group className="mb-3" controlId="formBasicName">
                                         <Form.Label>Name</Form.Label>
-                                        <Form.Control required onBlur={handleFormData} name="name" type="name" placeholder="Your Name" />
+                                        <Form.Control required onBlur={handleFormData}  name="name" type="name" placeholder="Your Name" />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -152,7 +149,7 @@ const Login = () => {
                                     <h1>Log In</h1>
                                         <Form.Group className="mb-3" controlId="formBasicEmail">
                                             <Form.Label>Email address</Form.Label>
-                                            <Form.Control required onBlur={handleFormData} name="email" type="email" placeholder="Enter email" />
+                                            <Form.Control required onBlur={handleFormData} autoComplete="off" name="email" type="email" placeholder="Enter email" />
                                         </Form.Group>
     
                                         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -166,14 +163,19 @@ const Login = () => {
                                 </Form.Group>
                                 
                                 <div className="spiner_holder">
-                                <div className="btn_holder">
-                                    <Button variant="primary" type="submit">{toggler?'Register':'Log In'}</Button>
-                                    {toggler?'':<Button className="forget_pass_button" variant="secondary" onClick={handleShow}>Forgotten Password?</Button>}
-                                </div>
-                                    <div className="spiner">
-                                    {
-                                        logspiner?<Spinner animation="grow" />:''
-                                    }
+                                    <div className="btn_holder">
+                                        <div className="spiner">
+                                            <Button variant="primary" type="submit">{toggler?'Register':'Log In'}</Button>
+                                            <div className="spiner_main">
+                                            {
+                                                logspiner?<Spinner animation="grow" />:''
+                                            }
+                                            </div>
+                                        </div>
+
+                                        <div className="invisible_div">
+                                            {toggler?'':<Button className="forget_pass_button" variant="secondary" onClick={handleShow}>Forgotten Password?</Button>}
+                                        </div>
                                     </div>
                                 </div>
                                 </Form>

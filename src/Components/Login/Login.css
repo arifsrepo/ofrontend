@@ -19,16 +19,16 @@
     display: flex;
     justify-content: center;
     color: white;
-    padding: 30px;
+    padding: 20px;
 }
 
 
 .login_blur_div{
-    background-color: rgba(43, 42, 42, 0.507);
+    background-color: rgb(87 87 87 / 30%);
     /* background-color: rgba(63, 62, 62, 0.219); */
     padding: 15px;
     text-align: left;
-    width: 90%;
+    width: 98%;
     min-height: 670px;
 }
 
@@ -36,6 +36,11 @@
     font-family: 'Roboto', sans-serif;
     font-size: 60px;
     text-shadow: 2px 2px 8px #00000057;
+}
+
+.welcome_quote{
+    font-size: 15px;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 .col1{
@@ -62,8 +67,11 @@
 .spiner{
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: 15px;
+    justify-content: space-between;
+}
+
+.spiner_main{
+    margin-left: 10px;
 }
 
 .forget_pass_button{
@@ -85,8 +93,13 @@
 }
 
 .btn_holder{
-    background-color: red;
     display: flex;
+}
+
+.invisible_div{
+    height: 50px;
+    display: flex;
+    align-items: center;
 }
 
 @media screen and (max-width: 900px) {
@@ -94,7 +107,6 @@
         font-size: 40px;
     }
     .btn_holder{
-        background-color: green;
         height: auto;
         flex-flow:row wrap;
     }
@@ -112,8 +124,13 @@
     .login_form_holder{
         padding: 3%;
     }
+}
 
-    .login_div{
-        padding: 2%;
+@media screen and (max-width: 440px) {
+    .invisible_div{
+        margin-top: 10px;
     }
 }
+
+
+

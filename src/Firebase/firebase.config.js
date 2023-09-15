@@ -1,11 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyDL6pejDMOiSkEH83KzfJYbfCNdze9USM0",
-    authDomain: "ahnaftrust-68537.firebaseapp.com",
-    projectId: "ahnaftrust-68537",
-    storageBucket: "ahnaftrust-68537.appspot.com",
-    messagingSenderId: "709833235837",
-    appId: "1:709833235837:web:68cfd60bc7dae382f58014",
-    measurementId: "G-41W9PJT1KY"
+    apiKey: "AIzaSyDPUonk9FIcztJqv4dLf3PCS_YVpPW8XRQ",
+    authDomain: "tumiarami-2022.firebaseapp.com",
+    projectId: "tumiarami-2022",
+    storageBucket: "tumiarami-2022.appspot.com",
+    messagingSenderId: "732265456773",
+    appId: "1:732265456773:web:aa831973535db36da9f5ec",
+    measurementId: "G-MMN8X64GC4"
   };
 
   export default firebaseConfig;
