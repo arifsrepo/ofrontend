@@ -31,13 +31,22 @@ const PhotoGallery = () => {
   const [loadMoreDetection, setLoadMoreDetection] = useState(0);
   const [currentstate, setCurrentstate] = useState('');
   const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const [sldb, setSldb] = useState(null);
+  const [terminator, setTerminator] = useState(true);
+  const [dbnumberstate, setDbnumberstate] = useState(1);
   const params = useParams();
   const contextData = useContext(MyContext);
   const { userdata } = contextData;
   
   let notbreaker = true;
+  let starting = limit;
   let timer = 0;
   const { api, setApi, apiManager, apierror, msgBoxHeight, errorMsgHandler } = useApiManager();
+
+  const loadImg = e => {
+    e.preventDefault();
+    handleLen(dbnumberstate);
+  }
 
   const decode = (secret, ciphertext) => {
     const dec = [];
@@ -50,7 +59,6 @@ const PhotoGallery = () => {
     return dec.join('');
   };
   
-
   const onSwitchAction = () => {
     setIsSwitchOn(!isSwitchOn);
   };
@@ -72,14 +80,23 @@ const PhotoGallery = () => {
     setUploading(true);
     setHeart(false);
     setSuccess('');
+    setCurrentstate('');
     setErrormsg([]);
     setDownbtn(true);
     const formData = new FormData();
     formData.append('file', selectedFile);
     formData.append('gallery', params?.galleryId);
     formData.append('secret', codetwo);
-
-    fetch('https://ourbackend-zauf.onrender.com/uploads', {
+    if(sldb){
+      formData.append('sldb', sldb);
+    } else {
+      setCurrentstate("Select Database");
+      setUploading(false);
+      setDownbtn(false);
+      return;
+    }
+    console.log(sldb);
+    fetch(`${api}/uploads`,{
       method: 'POST',
       body: formData
     })
@@ -113,18 +130,17 @@ const PhotoGallery = () => {
     }
   }
 
-  const handleLen = e => {
-    e.preventDefault();
+  const handleLen = dbnumber => {
     setImageloading(true);
     setHeart(false);
     setProgressdata(0);
     setUpbtn(true);
     setSuccess('');
+    setCurrentstate('');
     timer = 0;
     startTime();
 
-    const secret = { gallery : params?.galleryId, start: picture?.length, limit: limit};
-    // fetch('http://localhost:5000/dlen',{
+    const secret = { gallery : params?.galleryId, start : 0, limit : limit, db : dbnumber};
     fetch(`${api}/dlen`,{
       method:'POST',
       headers:{
@@ -134,10 +150,12 @@ const PhotoGallery = () => {
     })
     .then(res => res.json())
     .then(res => {
-      setDatalength(res);
-      // fetch('http://localhost:5000/picture',{
+      setDatalength(res + picture.length);
+      if(res < 1 && dbnumber === 1){
+        loadOtherDB();
+        return;
+      }
       fetch(`${api}/picture`,{
-        
         method:'POST',
         headers:{
             'content-type':'application/json'
@@ -146,6 +164,7 @@ const PhotoGallery = () => {
       })
       .then(res => res.json())
       .then(data => {
+          let arr = picture;
             let i = 0;
             if(data?.length){
                 for(i; i < data?.length; i++){
@@ -153,7 +172,8 @@ const PhotoGallery = () => {
                   data[i].b64 = decoded;
                 }
                 if(i === data?.length){
-                  setPicture(data);
+                  Array.prototype.push.apply(arr,data);
+                  setPicture(arr);
                 } else {
                     console.log("No Picture Found");
                 }
@@ -197,13 +217,15 @@ const PhotoGallery = () => {
 
   const handleLoadMore = () => {
     setSuccess('');
+    setCurrentstate('');
+    if(picture?.length === datalength && datalength > 0 && terminator){
+      loadOtherDB();
+    }
+
     if(picture?.length < datalength){
       setLoadingmore(true);
-      const secret = { gallery : params?.galleryId, start: picture?.length, limit: limit};
+      const secret = { gallery : params?.galleryId, start: terminator?picture.length : starting, limit: limit, db:terminator?1:2 };
       fetch(`${api}/picture`,{
-      // fetch('https://odd-teal-haddock-wig.cyclic.app/picture',{
-      // fetch('http://localhost:5000/picture',{
-      // fetch('https://ourbackend-zauf.onrender.com/picture',{
         method:'POST',
         headers:{
             'content-type':'application/json'
@@ -222,6 +244,10 @@ const PhotoGallery = () => {
             if(i === data?.length){
               Array.prototype.push.apply(arr,data);
               setPicture(arr);
+              starting = starting + limit;
+              if(!terminator){
+                starting = starting + limit;
+              }
             } else {
                 console.log("No Picture Found");
             }
@@ -245,10 +271,26 @@ const PhotoGallery = () => {
     }
   }
 
+  const loadOtherDB = () => {
+      setTerminator(false);
+      setDbnumberstate(2);
+      handleLen(2);
+  }
+
   useEffect(() => {
     handleLoadMore();
   },[loadMoreDetection])
 
+  useEffect(() => {
+    fetch(`${api}/dbs`)
+    .then(response => response.json())
+    .then(result => {
+      setSldb(result[0].selected);
+    })
+    .catch(err => {
+      setErrormsg({err});
+    });
+  },[])
 
   return (
       <div>
@@ -264,7 +306,7 @@ const PhotoGallery = () => {
                 <div className="form_control">
                   <Form onSubmit={handleFileUpload}>
                     <Form.Group controlId="formFileMultiple" className="mb-3">
-                      <Form.Label>Upload Image</Form.Label>
+                      <Form.Label>Upload Image To Database {sldb}</Form.Label>
                       <Form.Control required onChange={handleFileSelect} type="file" name="myFile" />
                     </Form.Group>
                     <div className="uploader_btn">
@@ -276,7 +318,7 @@ const PhotoGallery = () => {
                     </div>
                   </Form>
                   <br />
-                  <Form onSubmit={handleLen} className="code_holder">
+                  <Form onSubmit={loadImg} className="code_holder">
                     <Form.Control required onChange={handleCodeOne} className="code_holder_input" type="number" name="num1" />
                     <Button disabled={downbtn} type="submit"> Show Image </Button>
                       {

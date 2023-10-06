@@ -12,6 +12,7 @@ import NoteOne from './Components/NoteOne/NoteOne';
 import NoteTwo from './Components/NoteTwo/NoteTwo';
 import SecretRoute from './Components/SecretRoute/SecretRoute';
 import AdminControl from './Components/AdminControl/AdminControl';
+import Audio from './Components/Audio/Audio';
 import useActiveSession from './hooks/useActiveSession';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/noteone" element={<ProtectedRoute><NoteOne /></ProtectedRoute>} />
         <Route path="/notetwo" element={<ProtectedRoute><NoteTwo /> </ProtectedRoute>} />
         <Route path="/secretroute" element={<ProtectedRoute> <SecretRoute /> </ProtectedRoute>} />
+        <Route path="/audio" element={<ProtectedRoute> <Audio /> </ProtectedRoute> } />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

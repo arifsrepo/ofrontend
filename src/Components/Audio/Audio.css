@@ -1,0 +1,59 @@
+.audio_banner{
+    
+}
+
+.audio_list{
+    height: 300px;
+}
+
+.list_item_flexer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list_holder{
+    padding: 20px;
+}
+
+.player_holder{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.player_img{
+    background-image: url('https://i.ibb.co/2nvgvLR/FB-IMG-1668136951181.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    min-height: 580px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding: 20px;
+}
+
+.add_audio_icon{
+    color: cornflowerblue;
+    font-size: 40px;
+    position: fixed;
+    z-index: 5;
+    bottom: 140px;
+    right: 20px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.list-group-item{
+    padding: 10px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.list-group-item:hover{
+    background-color: rgb(216, 216, 216);
+}
+
+

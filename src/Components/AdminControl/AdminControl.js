@@ -2,7 +2,7 @@ import { faFolderOpen, faGears, faPaperPlane } from '@fortawesome/free-solid-svg
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Dropdown, Row } from 'react-bootstrap';
 import useActiveSession from '../../hooks/useActiveSession';
 import useApiManager from '../../hooks/useApiManager';
 import PieChart from '../PieChart/PieChart';
@@ -16,16 +16,28 @@ const AdminControl = () => {
     const [adminerror, setAdminerror] = useState('');
     const { location } = useActiveSession();
     const { api, setApi, apiManager } = useApiManager();
+    const [dsbtn, setDsbtn] = useState(false);
+    const [activedb, setActivedb] = useState(null);
+    const [dbname, setDbname] = useState(false);
 
     useEffect(() => {
-        fetch(`${api}/memory`)
-        .then(res => res.json())
-        .then(res => setDb1status(res))
-        .catch((err) => {
-            setAdminerror({err});
-            setApi(apiManager(api));
-        });
-    },[])
+        const payload = {"dbn": activedb};
+        if(activedb){
+            fetch(`${api}/memory`, {
+                method:'POST',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body:JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(res => setDb1status(res))
+            .catch((err) => {
+                setAdminerror({err});
+                setApi(apiManager(api));
+            });
+        }
+    },[dbname, dsbtn, activedb])
 
     useEffect(() => {
         fetch(`${api}/session`)
@@ -37,6 +49,36 @@ const AdminControl = () => {
         });
     },[location])
 
+
+    const dbSelect = db => {
+        setDsbtn(true);
+        fetch(`${api}/dbs`,{
+            method: 'PUT', // Use the PUT method
+            headers: {
+            'Content-Type': 'application/json', // Set the content type to JSON
+            },
+            body: JSON.stringify({"selected":db}),
+        })
+        .then(res => res.json())
+        .then(res => { 
+            setDsbtn(false);
+            setDbname(res?.acknowledged)
+        })
+        .catch((err) => setDsbtn(false));
+    }
+
+    useEffect(() => {
+      fetch(`${api}/dbs`)
+      .then(response => response.json())
+      .then(result => {
+        setActivedb(result[0].selected);
+      })
+      .catch(err => {
+        console.log({err});
+      });
+    },[dsbtn, dbname])
+
+
     return (
         <div>
             <div className="banner" />
@@ -44,7 +86,17 @@ const AdminControl = () => {
                 <Container>
                     {
                         adminerror&&adminerror
-                    }
+                    }  
+                  <br />
+                    <Dropdown>
+                      <Dropdown.Toggle disabled={dsbtn} variant="success" id="dropdown-basic">{activedb=='1'?"Database 1":"Database 2"}</Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <Dropdown.Item onClick={()=>dbSelect(1)}>Database 1</Dropdown.Item>
+                        <Dropdown.Item onClick={()=>dbSelect(2)}>Database 2</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    <br />
                     <Row className="admin_control_container">
                         <Col className="chart_holder" xs={12} sm={12} md={6}>
                             {
@@ -57,6 +109,24 @@ const AdminControl = () => {
                                 <h2><b>Database Report</b></h2>
                                     <br />
                                     <br />
+                                    <table className="db_report_text">
+                                        <tr>
+                                            <th><FontAwesomeIcon icon={faFolderOpen} style={{color: "#024796",}} className="db_report_icon" /></th>
+                                            <th>Total Space : {db1status?.totalSpace} MB</th> 
+                                        </tr>
+                                        <br />
+                                        <tr>
+                                            <th><FontAwesomeIcon icon={faPaperPlane} style={{color: "#0f8978",}} className="db_report_icon" /></th>
+                                            <th>Free Space : {db1status?.availSpace} MB</th>
+                                        </tr>
+                                        <br />
+                                        <tr>
+                                            <th><FontAwesomeIcon icon={faGears} style={{color: "#f05e33",}} className="db_report_icon" /></th>
+                                            <th>Used Space : {(db1status?.totalSpace-db1status?.availSpace).toFixed(2)} MB</th>
+                                        </tr>
+                                    </table>
+
+                                    {/* <br />
                                     <div className="db_report_text">
                                         <FontAwesomeIcon icon={faFolderOpen} style={{color: "#024796",}} className="db_report_icon" />
                                         Total Space : {db1status?.totalSpace} MB
@@ -70,7 +140,8 @@ const AdminControl = () => {
                                     <div className="db_report_text">
                                         <FontAwesomeIcon icon={faGears} style={{color: "#f05e33",}} className="db_report_icon" />
                                         Used Space : {(db1status?.totalSpace-db1status?.availSpace).toFixed(2)} MB
-                                    </div>
+                                    </div> */}
+
                                 <br />
                             </div>
                         </Col>

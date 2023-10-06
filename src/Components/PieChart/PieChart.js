@@ -2,7 +2,7 @@ import React from 'react';
 import { Chart } from "react-google-charts";
 
 const PieChart = (props) => {
-    
+
     const data = [
         ["Memory", "Status"],
         ["Used", (props?.db1status?.totalSpace-props?.db1status?.availSpace)],

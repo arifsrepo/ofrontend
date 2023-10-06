@@ -73,7 +73,7 @@ const NoteOne = () => {
         <>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Note</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form onSubmit={handleFormSubmit}>
@@ -132,7 +132,7 @@ const NoteOne = () => {
                 </div>
             </div>
             <div>
-                <FontAwesomeIcon onClick={handleShow} className="icon_style" icon={faCirclePlus} />
+                <FontAwesomeIcon onClick={handleShow} className="icon_style_note" icon={faCirclePlus} />
             </div>
         </>
     );

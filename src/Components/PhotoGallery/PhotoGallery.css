@@ -82,6 +82,7 @@
   
   .masonry-grid {
     display: flex;
+    justify-content: center;
     margin-left: -10px; /* Remove left margin to align with container edge */
     width: auto;
   }

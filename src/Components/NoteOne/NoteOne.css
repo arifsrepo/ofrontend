@@ -12,6 +12,17 @@
     background-color: #f8f9fa;
 }
 
+.icon_style_note{
+  color: cornflowerblue;
+  font-size: 40px;
+  position: fixed;
+  z-index: 5;
+  bottom: 70px;
+  right: 20px;
+  background-color: white;
+  border-radius: 50%;
+}
+
 .controll_bar{
   position: fixed;
   z-index: 2;

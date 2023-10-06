@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useApiManager from '../../hooks/useApiManager';
 import SiteNavBar from '../SiteNavBar/SiteNavBar';
 import './SecretRoute.css';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faRotate } from '@fortawesome/free-solid-svg-icons';
 
 const SecretRoute = () => {
     const { api, server, setApi, apiManager } = useApiManager();
@@ -67,8 +67,6 @@ const SecretRoute = () => {
         })
     },[api, show])
 
-
-
     return (
         <div>
             <div className="banner">
@@ -109,8 +107,8 @@ const SecretRoute = () => {
                 </Container>
             </div>
             <br />
-            <div className="icon_holder">
-                <FontAwesomeIcon onClick={handleShow} className="icon_class" icon={faCirclePlus} />
+            <div>
+                <FontAwesomeIcon className="api_change_icon_holder" onClick={()=>setApi(apiManager(api))} icon={faRotate} />
             </div>
         </div>
     );
