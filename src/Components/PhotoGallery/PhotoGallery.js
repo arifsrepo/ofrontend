@@ -34,7 +34,7 @@ const PhotoGallery = () => {
   const [sldb, setSldb] = useState(null);
   const [terminator, setTerminator] = useState(true);
   const [dbnumberstate, setDbnumberstate] = useState(1);
-  const [loadMoreStarting, setLoadMoreStarting] = useState(0);
+  const [loadMoreStarting, setLoadMoreStarting] = useState(limit);
   const params = useParams();
   const contextData = useContext(MyContext);
   const { userdata } = contextData;

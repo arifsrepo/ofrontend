@@ -2,9 +2,13 @@ import React from 'react';
 import { Chart } from "react-google-charts";
 
 const PieChart = (props) => {
+  let clr;
+    if(props?.db1status?.totalSpace-props?.db1status?.availSpace > 450){
+      clr = {color: '#dc3545'};
+    } else {
+      clr = {color: '#3376DB'};
+    }
 
-  console.log(props?.db1status);
-  
     const data = [
         ["Memory", "Status"],
         ["Used", (props?.db1status?.totalSpace-props?.db1status?.availSpace)],
@@ -16,8 +20,8 @@ const PieChart = (props) => {
         is3D: false,
         legend: 'none',
         slices: {
-          0: { color: '#3376DB' },
-          1: { color: '#00798C' }  //FREE
+          0: {color: '#00798C'},
+          1: clr  //FREE
         },
         animation: {
           startup: true,

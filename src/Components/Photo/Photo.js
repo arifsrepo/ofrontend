@@ -9,8 +9,6 @@ const Photo = (props) => {
         <div> 
             <img className="img-fluid single_photo" src={`data:image/png;base64,${str}`}/>
             <br />
-            <p>{props?.data?.name}</p>
-            <br />
         </div>
     );
 };
