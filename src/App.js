@@ -26,7 +26,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<ProtectedRoute><Register /></ProtectedRoute>} />
         <Route path="/verifie" element={<Verifie />} />
-        <Route path="AdminControl" element={<ProtectedRoute><AdminControl /> </ProtectedRoute>} />
+        <Route path="/AdminControl" element={<ProtectedRoute><AdminControl /> </ProtectedRoute>} />
         <Route path="/gallery/:galleryId/date/:dateId" element={<ProtectedRoute><PhotoGallery /> </ProtectedRoute>} />
         <Route path="/secretroute/gallery/:galleryId" element={<ProtectedRoute><PhotoGallery /> </ProtectedRoute>} />
         <Route path="/noteone" element={<ProtectedRoute><NoteOne /></ProtectedRoute>} />

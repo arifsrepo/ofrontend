@@ -3,6 +3,8 @@ import { Chart } from "react-google-charts";
 
 const PieChart = (props) => {
 
+  console.log(props?.db1status);
+  
     const data = [
         ["Memory", "Status"],
         ["Used", (props?.db1status?.totalSpace-props?.db1status?.availSpace)],

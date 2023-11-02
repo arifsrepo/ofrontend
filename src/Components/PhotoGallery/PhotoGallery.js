@@ -34,6 +34,7 @@ const PhotoGallery = () => {
   const [sldb, setSldb] = useState(null);
   const [terminator, setTerminator] = useState(true);
   const [dbnumberstate, setDbnumberstate] = useState(1);
+  const [loadMoreStarting, setLoadMoreStarting] = useState(0);
   const params = useParams();
   const contextData = useContext(MyContext);
   const { userdata } = contextData;
@@ -224,7 +225,7 @@ const PhotoGallery = () => {
 
     if(picture?.length < datalength){
       setLoadingmore(true);
-      const secret = { gallery : params?.galleryId, start: terminator?picture.length : starting, limit: limit, db:terminator?1:2 };
+      const secret = { gallery : params?.galleryId, start: terminator?picture.length : loadMoreStarting, limit: limit, db:terminator?1:2 };
       fetch(`${api}/picture`,{
         method:'POST',
         headers:{
@@ -279,6 +280,9 @@ const PhotoGallery = () => {
 
   useEffect(() => {
     handleLoadMore();
+    if(datalength > 0 && !terminator){
+      setLoadMoreStarting(loadMoreStarting + limit);
+    }
   },[loadMoreDetection])
 
   useEffect(() => {
