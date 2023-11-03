@@ -44,6 +44,7 @@ const SecretRoute = () => {
     }
 
     useEffect(()=> {
+        setAllsecret([]);
         fetch(`${api}/secret`)
         .then(res => res.json())
         .then(res => {
@@ -66,6 +67,7 @@ const SecretRoute = () => {
             }
         })
     },[api, show])
+
 
     return (
         <div>

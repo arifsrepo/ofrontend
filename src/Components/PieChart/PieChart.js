@@ -12,7 +12,7 @@ const PieChart = (props) => {
     const data = [
         ["Memory", "Status"],
         ["Used", (props?.db1status?.totalSpace-props?.db1status?.availSpace)],
-        ["Free", props?.db1status?.availSpace]
+        ["Free", 512-(props?.db1status?.totalSpace-props?.db1status?.availSpace)]
       ];
       
     const options = {

@@ -76,8 +76,7 @@ const AdminControl = () => {
       .catch(err => {
         console.log({err});
       });
-    },[dsbtn, dbname])
-
+    },[dsbtn, dbname])  
 
     return (
         <div>
@@ -112,12 +111,12 @@ const AdminControl = () => {
                                     <table className="db_report_text">
                                         <tr>
                                             <th><FontAwesomeIcon icon={faFolderOpen} style={{color: "#024796",}} className="db_report_icon" /></th>
-                                            <th>Total Space : {db1status?.totalSpace} MB</th> 
+                                            <th>Total Space : 512.00 MB</th> 
                                         </tr>
                                         <br />
                                         <tr>
                                             <th><FontAwesomeIcon icon={faPaperPlane} style={{color: "#0f8978",}} className="db_report_icon" /></th>
-                                            <th>Free Space : {db1status?.availSpace} MB</th>
+                                            <th>Free Space : {(512-(db1status?.totalSpace-db1status?.availSpace)).toFixed(2)} MB</th>
                                         </tr>
                                         <br />
                                         <tr>
@@ -125,23 +124,6 @@ const AdminControl = () => {
                                             <th>Used Space : {(db1status?.totalSpace-db1status?.availSpace).toFixed(2)} MB</th>
                                         </tr>
                                     </table>
-
-                                    {/* <br />
-                                    <div className="db_report_text">
-                                        <FontAwesomeIcon icon={faFolderOpen} style={{color: "#024796",}} className="db_report_icon" />
-                                        Total Space : {db1status?.totalSpace} MB
-                                    </div>
-                                    <br />
-                                    <div className="db_report_text">
-                                        <FontAwesomeIcon icon={faPaperPlane} style={{color: "#0f8978",}} className="db_report_icon" />
-                                        Free Space : {db1status?.availSpace} MB
-                                    </div>
-                                    <br />
-                                    <div className="db_report_text">
-                                        <FontAwesomeIcon icon={faGears} style={{color: "#f05e33",}} className="db_report_icon" />
-                                        Used Space : {(db1status?.totalSpace-db1status?.availSpace).toFixed(2)} MB
-                                    </div> */}
-
                                 <br />
                             </div>
                         </Col>
