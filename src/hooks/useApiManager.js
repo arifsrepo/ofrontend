@@ -10,12 +10,12 @@ const useApiManager = () => {
 
     if(api === null){
         if(rand > 0){
-            setApi("https://odd-teal-haddock-wig.cyclic.app");
-            // setApi("http://localhost:5000");
+            // setApi("https://odd-teal-haddock-wig.cyclic.app");
+            setApi("http://localhost:5000");
             setServer("Response From Server - 1");
         } else {
-            setApi("https://ourbackend-zauf.onrender.com");
-            // setApi("http://localhost:5000");
+            // setApi("https://ourbackend-zauf.onrender.com");
+            setApi("http://localhost:5000");
             setServer("Response From Server - 2");
         }
     }
@@ -23,14 +23,14 @@ const useApiManager = () => {
     const apiManager = apistate => {
         if(apistate === 'https://ourbackend-zauf.onrender.com'){
             setApierror("Retrying With Cyclic API, Please Wait!");
-            workingapi = "https://odd-teal-haddock-wig.cyclic.app";
-            // workingapi = "http://localhost:5000";
+            // workingapi = "https://odd-teal-haddock-wig.cyclic.app";
+            workingapi = "http://localhost:5000";
             setServer("Response From Server - 1");
             return workingapi;
         } else {
             setApierror("Retrying With Render API, Please Wait!");
-            workingapi = "https://ourbackend-zauf.onrender.com";
-            // workingapi = "http://localhost:5000";
+            // workingapi = "https://ourbackend-zauf.onrender.com";
+            workingapi = "http://localhost:5000";
             setServer("Response From Server - 2");
             return workingapi;
         }

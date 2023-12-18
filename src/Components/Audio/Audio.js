@@ -17,6 +17,7 @@ const Audio = () => {
     const [audioLoading, setAudioLoading] = useState(false);
     const [code, setCode] = useState(null);
     const [ecode, setEcode] = useState(null);
+    const [audioname, setAudioname] = useState('untitled');
   
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -50,6 +51,7 @@ const Audio = () => {
   
     const handleFileChange = (event) => {
       if (event.target.files[0]) {
+        setAudioname(event.target.files[0].name);
         const reader = new FileReader();
         reader.onload = (event) => {
           const base64 = event.target.result.split(',')[1]; // Extract base64 data from data URL
@@ -73,6 +75,7 @@ const Audio = () => {
         const formData = new FormData();
         formData.append('audio', selectedFile);
         formData.append('db', sldb);
+        formData.append('name', audioname);
 
         try {
             const response = await axios.post(`${api}/audio`, formData, {

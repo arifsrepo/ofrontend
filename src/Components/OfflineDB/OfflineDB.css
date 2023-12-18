@@ -1,0 +1,36 @@
+.offline_db_main_holder{
+    background-color: #f8f9fa;
+}
+
+.offline_db_input_controll{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.offline_db_input_flexer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+.offline_db_input_holder{  
+    background-color: #f8f9fa;
+    padding: 10px;
+    width: 80%;
+}
+
+.offline_db_input_button{ 
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+}
+
+
+@media (max-width: 767px){
+    .offline_db_input_holder{  
+        width: 100%;
+    }
+}

@@ -135,16 +135,16 @@ const AdminControl = () => {
                         <br />
                         <div className="table">
                             <div className="table_row">
-                                <div className="table_data">Email</div>
                                 <div className="table_data">IP Address</div>
+                                <div className="table_data">Email</div>
                                 <div className="table_data">Date</div>
                                 <div className="table_data">Visited</div>
                             </div>
                             {
                                 tabledata.map(data =>
                                     <div className="table_row">
+                                    <div className="table_data">{data?.ipAddress}</div>
                                         <div className="table_data">{data?.Email}</div>
-                                        <div className="table_data">{data?.ipAddress}</div>
                                         <div className="table_data">{data?.Date + ", Time : " + data?.Time}</div>
                                         <div className="table_data">{data?.Visited}</div>
                                     </div>)

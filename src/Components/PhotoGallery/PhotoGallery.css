@@ -96,3 +96,10 @@
     display: block;
     margin-bottom: 0; /* Remove image spacing */
   }
+
+  .processing_report{
+      height: 20px;
+      bottom: 0;
+      display: flex;
+      justify-content: space-around;
+  }

@@ -10,6 +10,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import useApiManager from '../../hooks/useApiManager';
 import Masonry from 'react-masonry-css';
 import { MyContext } from '../../Context/AuthContext';
+import SaveButton from '../SaveButton/SaveButton';
 
 
 const PhotoGallery = () => {
@@ -35,6 +36,7 @@ const PhotoGallery = () => {
   const [terminator, setTerminator] = useState(true);
   const [dbnumberstate, setDbnumberstate] = useState(1);
   const [loadMoreStarting, setLoadMoreStarting] = useState(limit);
+  const [messageleft, setMessageleft] = useState('');
   const params = useParams();
   const contextData = useContext(MyContext);
   const { userdata } = contextData;
@@ -42,7 +44,7 @@ const PhotoGallery = () => {
   let notbreaker = true;
   let starting = limit;
   let timer = 0;
-  const { api, setApi, apiManager, apierror, msgBoxHeight, errorMsgHandler } = useApiManager();
+  const { api, setApi, apiManager, apierror, msgBoxHeight, errorMsgHandler} = useApiManager();
 
   const loadImg = e => {
     e.preventDefault();
@@ -186,6 +188,9 @@ const PhotoGallery = () => {
         setDownbtn(true);
         setLoadMoreDetection(loadMoreDetection + 1);
         setCurrentstate('');
+        if(datalength > 0 && !terminator){
+          setLoadMoreStarting(loadMoreStarting + limit);
+        }
       })
       .catch((err) => {
         if(err){
@@ -194,7 +199,7 @@ const PhotoGallery = () => {
         notbreaker = false;
         setImageloading(false);
         stopTimer(progressdata);
-        setLimit(3);
+        //setLimit(3);
         setLoadMoreDetection(loadMoreDetection + 1);
         setCurrentstate('Failed To Fetch, Try Again!');
         errorMsgHandler();
@@ -208,7 +213,7 @@ const PhotoGallery = () => {
       notbreaker = false;
       setImageloading(false);
       stopTimer(progressdata);
-      setLimit(3);
+      //setLimit(3);
       setLoadMoreDetection(loadMoreDetection + 1);
       setCurrentstate('Failed To Fetch, Try Again!');
       errorMsgHandler();
@@ -257,13 +262,16 @@ const PhotoGallery = () => {
         setLoadingmore(false);
         setLoadMoreDetection(loadMoreDetection + 1);
         setCurrentstate('');
+        if(datalength > 0 && !terminator){
+          setLoadMoreStarting(loadMoreStarting + limit);
+        }
       })
       .catch((err) => {
         if(err){
           setErrormsg({err});
         }
         setLoadingmore(false);
-        setLimit(3);
+        //setLimit(3);
         setLoadMoreDetection(loadMoreDetection + 1);
         setCurrentstate('Retrying, Please Wait!');
         errorMsgHandler();
@@ -280,9 +288,6 @@ const PhotoGallery = () => {
 
   useEffect(() => {
     handleLoadMore();
-    if(datalength > 0 && !terminator){
-      setLoadMoreStarting(loadMoreStarting + limit);
-    }
   },[loadMoreDetection])
 
   useEffect(() => {
@@ -366,7 +371,7 @@ const PhotoGallery = () => {
                 className="masonry-grid"
                 columnClassName="masonry-grid-column"
               >
-                { picture?.map((data) => <Photo data={data} codeone={codeone}></Photo>) }
+                { picture?.map((data) => <Photo data={data} codeone={codeone} isSwitchOn={isSwitchOn} offline={true}></Photo>) }
               </Masonry>
             </div>
             <div className="load_more_div">
@@ -379,6 +384,15 @@ const PhotoGallery = () => {
             <br />
             <div style={msgBoxHeight} className="show_error_section">
                 <p>{errormsg?.err?.message}<br ></br>{apierror&&apierror}</p>
+            </div>
+            <div>
+                <SaveButton gallery={params?.galleryId} date={params?.dateId} >Save Backup</SaveButton>
+            </div>
+            <br />
+            <br />
+            <div className="processing_report">
+              <p>{messageleft&&messageleft}</p>
+              <p>{messageleft&&messageleft}</p>
             </div>
       </div>
   );
