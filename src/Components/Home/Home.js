@@ -21,6 +21,7 @@ const Home = () => {
     const [allgallery, setAllgallery] = useState([]);
     const [loading, setLoading] = useState(false);
     const [ errormsg, setErrormsg] = useState([]);
+    const [rotation, setRotation] = useState(0);
     let toggle = true;
 
     const { api, server, setApi, apiManager, apierror, errorMsgHandler, msgBoxHeight } = useApiManager();
@@ -165,7 +166,7 @@ const Home = () => {
                 <p>{apierror&&apierror}</p>
             </div>
             <div>
-                <FontAwesomeIcon className="api_change_icon_holder" onClick={()=>{setApi(apiManager(api));setAllgallery([]);errorMsgHandler()}} icon={faRotate} />
+                <FontAwesomeIcon className="api_change_icon_holder" onClick={()=>{ setApi(apiManager(api));setAllgallery([]);errorMsgHandler()}} icon={faRotate} />
             </div>
             <br />
             <div>

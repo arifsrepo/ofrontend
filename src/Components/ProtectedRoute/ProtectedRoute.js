@@ -19,10 +19,10 @@ const ProtectedRoute = ({children}) => {
             } else if(!emailstate && user.email) {
                 console.log("redirect from PR 2");
                 return <Navigate to="/verifie"></Navigate>
-            } 
+            } else {
+                console.log("Something Went Wrong In Routing");
+            }
         }
-
-
     return <Navigate to="/login"></Navigate>
 };
 

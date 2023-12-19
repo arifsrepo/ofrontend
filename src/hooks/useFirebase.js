@@ -35,6 +35,18 @@ const useFirebase = () => {
             }
           });
     },[])
+    
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          setUser({});
+        }
+      });
+    
+      return () => {
+        unsubscribe();
+      };
+    }, []);
 
     const handleEmailPassSignIn = () => {
       console.log("set loading true");

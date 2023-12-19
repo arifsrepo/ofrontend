@@ -1,5 +1,6 @@
 import React from 'react';
-import './Photo.css';import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import './Photo.css';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Photo = (props) => {

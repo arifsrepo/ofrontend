@@ -5,6 +5,8 @@
 
 .photo_name{ 
     text-align: left;
+    color: #4b4b4b;
+    font-size: 16px;
     overflow: hidden; /* Hide the overflow content */
     white-space: nowrap; /* Prevent text from wrapping */
     text-overflow: ellipsis; /* Display an ellipsis (...) for overflowed text */
@@ -24,7 +26,6 @@
     justify-content: space-between;
     padding-left: 10px;
     padding-right: 10px;
-    border-bottom: 1px solid rgb(161, 160, 160);
 }
 
 @media screen and (max-width: 440px) {
